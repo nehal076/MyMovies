@@ -25,11 +25,14 @@ class MovieDetailBloc {
 
   _itemTransformer() {
     return ScanStreamTransformer(
-      (Future<TrailerModel> trailer, int id, int index) {
-        print(index);
-        trailer = _repository.fetchTrailers(id);
-        return trailer;
-      },
-    );
+        (Future<TrailerModel> trailer, int id, int index) {
+      print(index);
+      trailer = _repository.fetchTrailers(id);
+      return trailer;
+    }, emptyFutureTrailerModel());
+  }
+
+  Future<TrailerModel> emptyFutureTrailerModel() async {
+    return TrailerModel();
   }
 }

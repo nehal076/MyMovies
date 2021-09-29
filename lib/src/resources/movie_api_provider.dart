@@ -6,14 +6,15 @@ import '../models/trailer_model.dart';
 
 class MovieApiProvider {
   Client client = Client();
-  final _apiKey = 'api-key';
+  final _apiKey = '802b2c4b88ea1183e50e6b285a27696e';
   final _baseUrl = "http://api.themoviedb.org/3/movie";
 
   Future<ItemModel> fetchMovieList() async {
     Response response;
-    if(_apiKey != 'api-key') {
-       response = await client.get("$_baseUrl/popular?api_key=$_apiKey");
-    }else{
+    if (_apiKey != 'api-key') {
+      response =
+          await client.get(Uri.parse("$_baseUrl/popular?api_key=$_apiKey"));
+    } else {
       throw Exception('Please add your API key');
     }
     if (response.statusCode == 200) {
@@ -26,8 +27,8 @@ class MovieApiProvider {
   }
 
   Future<TrailerModel> fetchTrailer(int movieId) async {
-    final response =
-        await client.get("$_baseUrl/$movieId/videos?api_key=$_apiKey");
+    final response = await client
+        .get(Uri.parse("$_baseUrl/$movieId/videos?api_key=$_apiKey"));
 
     if (response.statusCode == 200) {
       return TrailerModel.fromJson(json.decode(response.body));

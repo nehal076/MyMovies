@@ -1,4 +1,5 @@
 class TrailerModel {
+  TrailerModel();
   int _id;
   List<_Result> _results = [];
 
